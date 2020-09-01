@@ -11,16 +11,16 @@
         <h2 class="text-h5 mb-5 white--text">Popular Courses</h2>
         <v-row class="mb-5" justify="center">
           <v-col cols="6" sm="3">
-            Course
+            <VerticalCourseCard :course="dummyCourse" />
           </v-col>
           <v-col cols="6" sm="3">
-            Course
+            <VerticalCourseCard :course="dummyCourse" />
           </v-col>
           <v-col cols="6" sm="3">
-            Course
+            <VerticalCourseCard :course="dummyCourse" />
           </v-col>
         </v-row>
-        <v-btn color="white" text>
+        <v-btn color="white" text :to="{ name: 'Courses' }">
           <v-icon left small>fa-arrow-right</v-icon>
           View More
         </v-btn>
@@ -30,8 +30,22 @@
 </template>
 
 <script>
-export default {
+import VerticalCourseCard from '@/components/cards/VerticalCourseCard.vue'
 
+export default {
+  components: {
+    VerticalCourseCard,
+  },
+  data () {
+    return {
+      dummyCourse: {
+        id: '123',
+        image: 'https://scholarship-positions.com/wp-content/uploads/2016/10/Free-Online-Course-1024x684.jpg',
+        title: 'Course Dummy #1',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel lacus fermentum, fringilla felis ut, auctor lacus. Nunc at ante quis urna volutpat fringilla. Praesent vitae ultricies felis. Ut non pharetra eros. Fusce quam massa, condimentum ac tempor at, dapibus at quam. Maecenas vulputate a turpis in porttitor. Donec quam massa, faucibus quis sapien vitae, mollis convallis orci. Etiam quam nisi, sagittis sit amet porttitor cursus, accumsan et odio.'
+      } 
+    }
+  }
 }
 </script>
 

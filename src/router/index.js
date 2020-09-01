@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue'
 import Courses from '@/views/Courses'
 import NewCourse from '@/views/NewCourse'
 import Search from '@/views/Search'
+import CourseDetails from '@/views/CourseDetails'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,11 @@ const routes = [
     path: '/courses/new',
     name: 'NewCourse',
     component: NewCourse
+  },
+  {
+    path: '/courses/:id',
+    name: 'CourseDetails',
+    component: CourseDetails
   },
   {
     path: '/courses',
