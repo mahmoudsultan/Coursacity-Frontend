@@ -12,9 +12,9 @@
       <v-card-text class="text-truncate">
         {{ course.description }}
       </v-card-text>
-      <v-card-actions>
+      <v-card-actions class="primary white--text">
         <v-spacer></v-spacer>
-        <v-btn color="primary" text :to="{ name: 'CourseDetails', params: { id: course.id } }">Details</v-btn>
+        <v-btn color="white" text :to="{ name: 'CourseDetails', params: { id: course.id } }">Details</v-btn>
       </v-card-actions>
     </v-card>
   </div>

@@ -44,7 +44,7 @@ export default {
         image: 'https://scholarship-positions.com/wp-content/uploads/2016/10/Free-Online-Course-1024x684.jpg',
         title: 'Course Dummy #1',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel lacus fermentum, fringilla felis ut, auctor lacus. Nunc at ante quis urna volutpat fringilla. Praesent vitae ultricies felis. Ut non pharetra eros. Fusce quam massa, condimentum ac tempor at, dapibus at quam. Maecenas vulputate a turpis in porttitor. Donec quam massa, faucibus quis sapien vitae, mollis convallis orci. Etiam quam nisi, sagittis sit amet porttitor cursus, accumsan et odio.'
-      } 
+      }
     }
   }
 }
