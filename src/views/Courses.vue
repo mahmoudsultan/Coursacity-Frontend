@@ -11,34 +11,34 @@
         </h1>
       </v-col>
       <v-spacer></v-spacer>
-      <v-col cols="12" md="6" lg="4">
+    </v-row>
+    <v-row class="mt-8">
+      <v-col cols="12" md="6" lg="6">
         <v-text-field
           name="search"
           label="Search"
-          id="id"
           solo
-          class="mt-lg-5 mt-md-2 mt-5"
+          v-model="searchInput"
           color="accent"
           prepend-inner-icon="fa-search"
         ></v-text-field>
       </v-col>
-    </v-row>
-    <v-row class="mt-8" justify="end">
-      <v-col cols="5" sm="2">
-        <v-select
-          :items="[1]"
-          value="1"
+      <v-spacer></v-spacer>
+      <v-col cols="6" md="2">
+        <v-combobox
+          :items="coursesPerPageCounts"
+          v-model="coursesPerPage"
           label="Courses Per Page"
-          outlined
-        ></v-select>
+          solo
+        ></v-combobox>
       </v-col>
-      <v-col cols="5" sm="2">
+      <v-col cols="6" md="2">
         <v-select
           :items="[1]"
           value="1"
           disabled
           label="Sort By"
-          outlined
+          solo
         ></v-select>
       </v-col>
     </v-row>
@@ -50,7 +50,7 @@
     <v-pagination
       class="mb-12"
       v-model="page"
-      :length="6"
+      :length="totalPagesCount"
     ></v-pagination>
   </v-container>
 </template>
@@ -64,7 +64,11 @@ export default {
   },
   data() {
     return {
-      page: 1
+      searchInput: '',
+      page: 1,
+      totalPagesCount: 6,
+      coursesPerPage: 10,
+      coursesPerPageCounts: [10, 20, 50, 100]
     };
   },
   computed: {
