@@ -32,6 +32,15 @@
           outlined
         ></v-select>
       </v-col>
+      <v-col cols="5" sm="2">
+        <v-select
+          :items="[1]"
+          value="1"
+          disabled
+          label="Sort By"
+          outlined
+        ></v-select>
+      </v-col>
     </v-row>
     <v-row justify="center">
       <v-col cols="12" sm="6" md="4" lg="3" class="mb-12" v-for="course in dummyCourses" :key="course.id">
