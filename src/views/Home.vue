@@ -2,21 +2,22 @@
   <v-container fill-height pa-0 fluid class="homepage-container">
     <v-row no-gutters>
       <v-col cols="12" align="center" justify="center">
-        <h1 class="text-h1 mb-10 white--text font-weight-thin">Coursacity</h1>
+        <h1 class="text-h1 mb-10 white--text font-weight-thin hidden-xs-only">Coursacity</h1>
+        <h1 class="text-h3 mb-10 white--text font-weight-thin hidden-sm-and-up">Coursacity</h1>
         <span class="mt-5 text-subtitle-1 white--text">Coursacity is the world’s fastest, most efficient way to master the skills tech companies want. 100% online, part-time & self-paced.</span>
       </v-col>
     </v-row>
     <v-row justify="end" class="mt-auto mb-12">
       <v-col cols="12" justify="center" align="center">
         <h2 class="text-h5 mb-5 white--text">Popular Courses</h2>
-        <v-row class="mb-5" justify="center">
-          <v-col cols="6" sm="3">
+        <v-row class="mb-5 pa-sm-5" justify="center">
+          <v-col cols="8" sm="6" md="3">
             <VerticalCourseCard :course="dummyCourse" />
           </v-col>
-          <v-col cols="6" sm="3">
+          <v-col cols="8" sm="6" md="3" class="hidden-xs-only">
             <VerticalCourseCard :course="dummyCourse" />
           </v-col>
-          <v-col cols="6" sm="3">
+          <v-col cols="8" sm="6" md="3" class="hidden-xs-only">
             <VerticalCourseCard :course="dummyCourse" />
           </v-col>
         </v-row>
