@@ -10,7 +10,7 @@
     <v-row justify="end" class="mt-auto mb-12">
       <v-col cols="12" justify="center" align="center">
         <h2 class="text-h5 mb-5 white--text">Popular Courses</h2>
-        <v-row class="mb-5 pa-sm-5" justify="center">
+        <v-row class="pa-sm-5" justify="center">
           <v-col cols="8" sm="6" md="3">
             <VerticalCourseCard :course="dummyCourse" />
           </v-col>
@@ -21,7 +21,7 @@
             <VerticalCourseCard :course="dummyCourse" />
           </v-col>
         </v-row>
-        <v-btn color="white" text :to="{ name: 'Courses' }">
+        <v-btn color="white" x-large text :to="{ name: 'Courses' }">
           <v-icon left small>fa-arrow-right</v-icon>
           View More
         </v-btn>
