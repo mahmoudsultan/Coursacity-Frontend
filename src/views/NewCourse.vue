@@ -29,19 +29,35 @@ export default {
     };
   },
   methods: {
-    submit(newCourse) { // eslint-disable-line
+    async submit(newCourse) { // eslint-disable-line
       // TODO
       this.loading = {
         isLoading: true,
         message: 'Creating New Course',
       };
 
-      const self = this;
-      setTimeout(() => {
-        self.loading = {
-          isLoading: false,
-        }
-      }, 1000);
+      const courseFormData = new FormData();
+      courseFormData.append('title', newCourse.title);
+      courseFormData.append('description', newCourse.description);
+      courseFormData.append('slug', newCourse.slug);
+      courseFormData.append('photo', newCourse.photo);
+
+      try {
+        const responseData = (await this.$axios({
+          method: 'post',
+          url: '/courses',
+          data: courseFormData,
+          headers: {'Content-Type': 'multipart/form-data' }
+        })).data;
+
+        const createdCourse = responseData.course;
+        this.$router.push({ name: 'CourseDetails', params: { id: createdCourse.id } });
+
+      } catch (e) {
+        // TODO: Better Error Handling Here.
+        console.error(e); // eslint-disable-line
+      }
+
     }
   }
 }

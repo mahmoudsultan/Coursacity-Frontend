@@ -4,7 +4,7 @@
       <v-col cols="12" md="6" lg="8">
         <h1 :class="textSize">
           Courses
-          <v-btn right color="success" :to="{ name: 'NewCourse' }">
+          <v-btn rounded right color="success" :to="{ name: 'NewCourse' }">
             <v-icon left small>fa-plus</v-icon>
             New Course
           </v-btn>

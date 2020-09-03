@@ -12,6 +12,9 @@ export default new Vuetify({
         secondary: colors.cyan.lighten2, // #4DD0E1
         accent: colors.cyan.accent2, // #18FFFF
       },
+      options: {
+        customProperties: true,
+      },
     },
   },
 });

@@ -10,7 +10,7 @@
       >
         <v-card elevation="5">
           <v-img 
-            :src="courseDetails.image || defaultCourseImage"
+            :src="coursePhoto"
             aspect-ratio="1.7"
             max-height="40vh"
             class="white--text justify-center align-end"
@@ -20,7 +20,7 @@
                 <!-- TODO: Careful of XSS -->
                 <p class="text-center text-sm-h2 text-xs-h3">
                   {{ courseDetails.title }}
-                  <v-btn right color="error" @click="deleteCourse" :loading="deleteLoading">
+                  <v-btn rounded right color="error" @click="deleteCourse" :loading="deleteLoading">
                     <v-icon left small>fa-trash-alt</v-icon>
                     Delete
                   </v-btn>
@@ -60,8 +60,15 @@ export default {
     }
   },
   computed: {
-    defaultCourseImage() {
+    defaultImage() {
       return process.env.VUE_APP_DEFAULT_COURSE_PHOTO;
+    },
+    coursePhoto() {
+      if (this.courseDetails.photo) {
+        return `${process.env.VUE_APP_API_BASE_URL}/${this.courseDetails.photo}`;
+      }
+
+      return this.defaultImage();
     }
   },
   methods: {

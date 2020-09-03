@@ -8,7 +8,7 @@
             :rules="titleRules"
             name="title"
             label="Title"
-            v-model="newCourse.name"
+            v-model="newCourse.title"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -73,14 +73,14 @@ export default {
     return {
       isDataValid: false,
       newCourse: {
-        name: '',
+        title: '',
         description: '',
         slug: '',
         photo: null
       },
       titleRules: [
         v => !!v || 'Title is required',
-        v => v.length <= 100 || 'Name must be less than 100 characters',
+        v => v.length <= 100 || 'Title must be less than 100 characters',
       ],
       descriptionRules: [
         v => !!v || 'Description is required',
