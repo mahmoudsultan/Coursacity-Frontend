@@ -29,6 +29,7 @@ export default {
     return {
       fetchedCourse: null,
       loading: true,
+      deleteLoading: false,
       dummyCourse: {
         id: '123',
         image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
@@ -46,23 +47,29 @@ export default {
     }
   },
   methods: {
-    fetchCourse() {
+    async fetchCourse() {
       this.loading = true;
 
-      const self = this;
-      setTimeout(() => {
-        self.fetchedCourse = self.dummyCourse;
-        self.loading = false;
-      }, 1000);
+      try {
+        this.fetchedCourse = (await this.$axios.get(`/courses/${this.courseId}`)).data.course;
+        this.loading = false;
+      } catch (e) {
+        // TODO: Better Error Handling Here.
+        console.error(e); // eslint-disable-line
+      }
     },
-    deleteCourse() {
-      this.loading = true;
+    async deleteCourse() {
+      this.deleteLoading = true;
 
-      const self = this;
-      setTimeout(() => {
+      try {
+        await this.$axios.delete(`/courses/${this.courseId}`);
+        this.deleteLoading = false;
+
         this.$router.push({ name: 'Courses' })
-        self.loading = false;
-      }, 1000);
+      } catch (e) {
+        // TODO: Better Error Handling Here.
+        console.error(e); // eslint-disable-line
+      }
     }
   },
   mounted () {

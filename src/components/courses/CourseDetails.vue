@@ -10,17 +10,17 @@
       >
         <v-card elevation="5">
           <v-img 
-            :src="courseDetails.image"
+            :src="courseDetails.image || defaultCourseImage"
             aspect-ratio="1.7"
             max-height="40vh"
             class="white--text justify-center align-end"
           >
-            <v-overlay value="true" color="primary" absolute>
+            <v-overlay value="true" :color="overlayColor" absolute>
               <v-card-title primary-title>
                 <!-- TODO: Careful of XSS -->
                 <p class="text-center text-sm-h2 text-xs-h3">
                   {{ courseDetails.title }}
-                  <v-btn right color="error" @click.stop="deleteCourse">
+                  <v-btn right color="error" @click="deleteCourse" :loading="deleteLoading">
                     <v-icon left small>fa-trash-alt</v-icon>
                     Delete
                   </v-btn>
@@ -53,8 +53,22 @@ export default {
       required: true,
     }
   },
+  data () {
+    return {
+      overlayColor: 'primary',
+      deleteLoading: false,
+    }
+  },
+  computed: {
+    defaultCourseImage() {
+      return process.env.VUE_APP_DEFAULT_COURSE_PHOTO;
+    }
+  },
   methods: {
     deleteCourse() {
+      this.overlayColor = 'error';
+      this.deleteLoading = true;
+
       this.$emit('deleteCourse');
     }
   }
