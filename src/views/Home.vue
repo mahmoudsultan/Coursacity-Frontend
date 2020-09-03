@@ -11,14 +11,9 @@
       <v-col cols="12" justify="center" align="center">
         <h2 class="text-h5 mb-5 white--text">Popular Courses</h2>
         <v-row class="pa-sm-5" justify="center">
-          <v-col cols="8" sm="6" md="3">
-            <VerticalCourseCard :course="dummyCourse" />
-          </v-col>
-          <v-col cols="8" sm="6" md="3" class="hidden-xs-only">
-            <VerticalCourseCard :course="dummyCourse" />
-          </v-col>
-          <v-col cols="8" sm="6" md="3" class="hidden-xs-only">
-            <VerticalCourseCard :course="dummyCourse" />
+          <v-col cols="8" sm="6" md="3" v-for="i in Array(numberOfPopularCoursesToShow).keys()" :key="i">
+            <VerticalCourseCardSkeleton v-if="isCoursesLoading" />
+            <VerticalCourseCard v-else :course="popularCourses[i]" />
           </v-col>
         </v-row>
         <v-btn color="white" x-large text :to="{ name: 'Courses' }">
@@ -32,20 +27,41 @@
 
 <script>
 import VerticalCourseCard from '@/components/cards/VerticalCourseCard.vue'
+import VerticalCourseCardSkeleton from '@/components/cards/VerticalCourseCardSkeleton.vue'
 
 export default {
   components: {
     VerticalCourseCard,
+    VerticalCourseCardSkeleton
   },
   data () {
     return {
-      dummyCourse: {
-        id: '123',
-        image: 'https://scholarship-positions.com/wp-content/uploads/2016/10/Free-Online-Course-1024x684.jpg',
-        title: 'Course Dummy #1',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel lacus fermentum, fringilla felis ut, auctor lacus. Nunc at ante quis urna volutpat fringilla. Praesent vitae ultricies felis. Ut non pharetra eros. Fusce quam massa, condimentum ac tempor at, dapibus at quam. Maecenas vulputate a turpis in porttitor. Donec quam massa, faucibus quis sapien vitae, mollis convallis orci. Etiam quam nisi, sagittis sit amet porttitor cursus, accumsan et odio.'
+      isCoursesLoading: true,
+      popularCourses: [],
+    }
+  },
+  computed: {
+    numberOfPopularCoursesToShow() {
+      if (this.$vuetify.breakpoint.name == 'xs') return 1;
+      return 3;
+    }
+  },
+  methods: {
+    async loadPopluarCourses() {
+      this.isCoursesLoading = true;
+
+      try {
+        this.popularCourses = (await this.$axios.get(`/courses/popular`)).data.courses;
+
+        this.isCoursesLoading = false;
+      } catch (e) {
+        // TODO: Better error handling here.
+        console.error(e); // eslint-disable-line
       }
     }
+  },
+  mounted() {
+    this.loadPopluarCourses();
   }
 }
 </script>
