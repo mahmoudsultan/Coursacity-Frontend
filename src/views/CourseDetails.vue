@@ -1,7 +1,8 @@
 <template>
   <v-container>
+    <CourseDetailsSkeleton v-if="loading" />
     <CourseDetails 
-      v-if="!loading"
+      v-else
       :courseDetails="courseDetails"
       @deleteCourse="deleteCourse"
     />
@@ -10,6 +11,7 @@
 
 <script>
 import CourseDetails from '@/components/courses/CourseDetails.vue'
+import CourseDetailsSkeleton from '@/components/courses/CourseDetailsSkeleton.vue'
 
 export default {
   props: {
@@ -21,6 +23,7 @@ export default {
   },
   components: {
     CourseDetails,
+    CourseDetailsSkeleton,
   },
   data() {
     return {
