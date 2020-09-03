@@ -42,12 +42,9 @@
         ></v-select>
       </v-col>
     </v-row>
-    <v-row justify="center">
-      <v-col cols="12" sm="6" md="4" lg="3" class="mb-12" v-for="course in dummyCourses" :key="course.id">
-        <VerticalCourseCard :course="course" />
-      </v-col>
-    </v-row>
+    <CoursesPageGrid :loading="isCoursesLoading" :courses="courses" />
     <v-pagination
+      v-if="!isCoursesLoading"
       class="mb-12"
       v-model="page"
       :length="totalPagesCount"
@@ -56,11 +53,11 @@
 </template>
 
 <script>
-import VerticalCourseCard from '@/components/cards/VerticalCourseCard.vue'
+import CoursesPageGrid from '@/components/courses/CoursesPageGrid.vue'
 
 export default {
   components: {
-    VerticalCourseCard,
+    CoursesPageGrid,
   },
   data() {
     return {
@@ -68,7 +65,9 @@ export default {
       page: 1,
       totalPagesCount: 6,
       coursesPerPage: 10,
-      coursesPerPageCounts: [10, 20, 50, 100]
+      coursesPerPageCounts: [10, 20, 50, 100],
+      isCoursesLoading: true,
+      courses: []
     };
   },
   computed: {
@@ -95,6 +94,33 @@ export default {
 
       return dummyCoursesArr;
     }
+  },
+  methods: {
+    async loadPage() {
+      this.isCoursesLoading = true;
+      
+      try {
+        const responseData = (await this.$axios.get(`/courses?page=${this.page}&per=${this.coursesPerPage}`)).data;
+        this.courses = responseData.courses;
+        this.totalPagesCount = responseData.meta.total_pages;
+
+        this.isCoursesLoading = false;
+      } catch (e) {
+        // TODO: Better Error Handling here.
+        console.error(e); // eslint-disable-line
+      }
+    }
+  },
+  watch: {
+    page() {
+      this.loadPage();
+    },
+    coursesPerPage() {
+      this.loadPage();
+    }
+  },
+  mounted() {
+    this.loadPage();
   }
 }
 </script>

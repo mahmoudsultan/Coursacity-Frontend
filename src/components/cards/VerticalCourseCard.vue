@@ -2,7 +2,7 @@
   <div>
     <v-card elevation="2" >
       <v-img 
-        :src="course.image" 
+        :src="course.image || defaultImage" 
         aspect-ratio="1.7"
         :lazy-src="lazyImageLoadingSource"
       />
@@ -26,6 +26,11 @@ export default {
     course: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    defaultImage() {
+      return process.env.VUE_APP_DEFAULT_COURSE_PHOTO;
     }
   },
   data () {
