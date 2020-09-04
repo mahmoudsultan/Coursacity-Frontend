@@ -7,58 +7,98 @@
     </v-row>
     <v-row>
       <v-col cols="8">
-        <v-text-field
-          name="search"
-          label="Search"
-          solo
-          v-model="searchInput"
-          color="accent"
-          prepend-inner-icon="fa-search"
-        ></v-text-field>
+        <SearchBar :initialValue="searchInput" @search="handleNewSearchEvent" eventMode />
       </v-col>
     </v-row>
-    <v-row 
-      justify="center" 
-      align="center"
-      class="mt-12"
-      v-if="noSearchResults"
-    >
-      <p class="text-h3 font-weight-light text--secondary">No search results was found for {{ searchInput }} </p>
-    </v-row>
-    <v-row>
-      <v-col cols="12" sm="6" md="4" lg="3" class="mb-12" v-for="course in searchResults" :key="course.id">
-        <VerticalCourseCard :course="course" />
-      </v-col>
-    </v-row>
+
+    <template v-if="!searchLoading">
+      <v-row 
+        justify="center" 
+        align="center"
+        class="mt-12"
+        v-if="noSearchResults"
+      >
+        <p class="text-h3 font-weight-light text--secondary">No search results was found for {{ searchInput }} </p>
+      </v-row>
+      <v-row v-else>
+        <v-col>
+          <p class="text-h6">There {{ (totalCount > 1) ? 'are' : 'is' }} {{ totalCount }} search results:</p>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" sm="6" md="4" lg="3" class="mb-12" v-for="course in searchResults" :key="course.id">
+          <VerticalCourseCard :course="course"/>
+        </v-col>
+      </v-row>
+    </template>
+
+    <v-pagination
+      v-if="!searchLoading"
+      class="mb-12"
+      v-model="page"
+      :length="totalPages"
+    ></v-pagination>
   </v-container>
 </template>
 
 <script>
-import VerticalCourseCard from '@/components/cards/VerticalCourseCard.vue'
+import VerticalCourseCard from '@/components/cards/VerticalCourseCard.vue';
+import SearchBar from '@/components/SearchBar.vue';
 
 export default {
   components: {
     VerticalCourseCard,
+    SearchBar,
   },
   data () {
     return {
+      searchLoading: true,
       searchInput: '',
-      searchResults: [{
-        id: '123',
-        image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-        title: 'Course Dummy #1',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel lacus fermentum, fringilla felis ut, auctor lacus. Nunc at ante quis urna volutpat fringilla. Praesent vitae ultricies felis. Ut non pharetra eros. Fusce quam massa, condimentum ac tempor at, dapibus at quam. Maecenas vulputate a turpis in porttitor. Donec quam massa, faucibus quis sapien vitae, mollis convallis orci. Etiam quam nisi, sagittis sit amet porttitor cursus, accumsan et odio.'
-      }],
+      searchResults: [],
+      page: 1,
+      totalPages: 0,
+      totalCount: 0,
     }
   },
   computed: {
     noSearchResults() {
-      return false;
+      return !(this.searchLoading || this.searchResults.length);
     }
   },
-  mounted() {
-    // TODO: XSS
+  methods: {
+    async handleNewSearchEvent(searchInput) {
+      this.searchLoading = true;
+
+      this.searchInput = searchInput;
+      this.page = 1;
+      this.totalPages = 0;
+
+      this.search();
+    },
+    async search() {
+      this.searchLoading = true;
+
+      try {
+        const responseData = (await this.$axios.get(`/courses/search?q=${this.searchInput}&page=${this.page}`)).data;
+        this.searchResults = responseData.courses;
+        this.totalPages = responseData.meta.total_pages;
+        this.totalCount = responseData.meta.total_count;
+
+        this.searchLoading = false;
+      } catch (e) {
+        // TODO: Better error handling here.
+        console.error(e); // eslint-disable-line
+      }
+    }
+  },
+  watch: {
+    page() {
+      this.search();
+    }
+  },
+  created() {
     this.searchInput = this.$attrs.query;
+    this.search();
   }
 }
 </script>

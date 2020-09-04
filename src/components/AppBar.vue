@@ -21,7 +21,7 @@
           <v-btn color="primary" link :to="{ name: 'Courses'}" rounded>Courses</v-btn>
         </v-col>
         <v-col class="d-sm-none d-none d-md-flex">
-          <SearchBar />
+          <SearchBar compact />
         </v-col>
       </v-row>
     </v-container>

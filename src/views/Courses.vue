@@ -14,14 +14,7 @@
     </v-row>
     <v-row class="mt-8">
       <v-col cols="12" md="6" lg="6">
-        <v-text-field
-          name="search"
-          label="Search"
-          solo
-          v-model="searchInput"
-          color="accent"
-          prepend-inner-icon="fa-search"
-        ></v-text-field>
+        <SearchBar />
       </v-col>
       <v-spacer></v-spacer>
       <v-col cols="6" md="2">
@@ -53,15 +46,16 @@
 </template>
 
 <script>
-import CoursesPageGrid from '@/components/courses/CoursesPageGrid.vue'
+import CoursesPageGrid from '@/components/courses/CoursesPageGrid.vue';
+import SearchBar from '@/components/SearchBar.vue';
 
 export default {
   components: {
     CoursesPageGrid,
+    SearchBar,
   },
   data() {
     return {
-      searchInput: '',
       page: 1,
       totalPagesCount: 6,
       coursesPerPage: 10,

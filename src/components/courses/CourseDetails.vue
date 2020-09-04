@@ -65,7 +65,7 @@ export default {
     },
     coursePhoto() {
       if (this.courseDetails.photo) {
-        return `${process.env.VUE_APP_API_BASE_URL}/${this.courseDetails.photo}`;
+        return `${process.env.VUE_APP_API_BASE_URL}${this.courseDetails.photo}`;
       }
 
       return this.defaultImage();
