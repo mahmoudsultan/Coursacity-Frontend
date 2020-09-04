@@ -29,8 +29,7 @@ export default {
     };
   },
   methods: {
-    async submit(newCourse) { // eslint-disable-line
-      // TODO
+    async submit(newCourse) {
       this.loading = {
         isLoading: true,
         message: 'Creating New Course',

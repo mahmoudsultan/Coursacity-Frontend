@@ -18,7 +18,7 @@
         class="mt-12"
         v-if="noSearchResults"
       >
-        <p class="text-h3 font-weight-light text--secondary">No search results was found for {{ searchInput }} </p>
+        <p class="text-h3 font-weight-light text--secondary">No search results were found for {{ searchInput }} </p>
       </v-row>
       <v-row v-else>
         <v-col>
@@ -33,7 +33,7 @@
     </template>
 
     <v-pagination
-      v-if="!searchLoading"
+      v-if="!noSearchResults"
       class="mb-12"
       v-model="page"
       :length="totalPages"
