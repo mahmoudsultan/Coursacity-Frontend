@@ -53,8 +53,18 @@ export default {
         this.$router.push({ name: 'CourseDetails', params: { id: createdCourse.id } });
 
       } catch (e) {
-        // TODO: Better Error Handling Here.
-        console.error(e); // eslint-disable-line
+        if (e.response.status === 422) {
+          const slugErrors = e.response.data.errors.slug;
+          if (slugErrors.length && slugErrors[0].includes('taken')) {
+            this.$notifier.error('Slug is already taken. Please choose another slug.');
+          }
+        } else {
+          this.$notifier.error('Something went wrong. Please try again later.');
+        }
+
+        this.loading = {
+          isLoading: false,
+        };
       }
 
     }

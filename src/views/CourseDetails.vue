@@ -72,8 +72,7 @@ export default {
 
         this.$router.push({ name: 'Courses' })
       } catch (e) {
-        // TODO: Better Error Handling Here.
-        console.error(e); // eslint-disable-line
+        this.$notifier.error('Something went wrong. Please try again later.');
       }
     }
   },

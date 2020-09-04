@@ -7,7 +7,7 @@
         <span class="mt-5 text-subtitle-1 white--text">Coursacity is the world’s fastest, most efficient way to master the skills tech companies want. 100% online, part-time & self-paced.</span>
       </v-col>
     </v-row>
-    <v-row justify="end" class="mt-auto mb-12">
+    <v-row justify="end" class="mt-auto mb-12" v-if="!hidePopularCourses">
       <v-col cols="12" justify="center" align="center">
         <h2 class="text-h5 mb-5 white--text">Popular Courses</h2>
         <v-row class="pa-sm-5" justify="center">
@@ -38,6 +38,7 @@ export default {
     return {
       isCoursesLoading: true,
       popularCourses: [],
+      hidePopularCourses: false
     }
   },
   computed: {
@@ -55,8 +56,7 @@ export default {
 
         this.isCoursesLoading = false;
       } catch (e) {
-        // TODO: Better error handling here.
-        console.error(e); // eslint-disable-line
+        this.hidePopularCourses = true;
       }
     }
   },

@@ -32,6 +32,14 @@
       </v-row>
     </template>
 
+    <template v-else>
+      <v-row>
+        <v-col cols="12" sm="6" md="4" lg="3" class="mb-12" v-for="i in Array(5).keys()" :key="i">
+          <VerticalCourseCardSkeleton />
+        </v-col>
+      </v-row>
+    </template>
+
     <v-pagination
       v-if="!noSearchResults"
       class="mb-12"
@@ -43,11 +51,13 @@
 
 <script>
 import VerticalCourseCard from '@/components/cards/VerticalCourseCard.vue';
+import VerticalCourseCardSkeleton from '@/components/cards/VerticalCourseCardSkeleton.vue';
 import SearchBar from '@/components/SearchBar.vue';
 
 export default {
   components: {
     VerticalCourseCard,
+    VerticalCourseCardSkeleton,
     SearchBar,
   },
   data () {
@@ -87,7 +97,8 @@ export default {
         this.searchLoading = false;
       } catch (e) {
         // TODO: Better error handling here.
-        console.error(e); // eslint-disable-line
+        this.$notifier.error('Something went wrong. Please try again later.');
+        this.$router.push({ name: 'Courses' });
       }
     }
   },

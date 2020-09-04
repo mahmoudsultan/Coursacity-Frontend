@@ -101,7 +101,7 @@ export default {
         this.isCoursesLoading = false;
       } catch (e) {
         // TODO: Better Error Handling here.
-        console.error(e); // eslint-disable-line
+        this.$notifier.error('Something went wrong. Please try again later.')
       }
     }
   },
