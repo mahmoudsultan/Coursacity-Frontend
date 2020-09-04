@@ -6,12 +6,17 @@ import vuetify from './plugins/vuetify';
 import router from './router'
 
 import { Axios } from './plugins/axios';
+import { notifier } from './plugins/notifier';
+
+import store from './store';
 
 Vue.use(Axios, { baseURL: process.env.VUE_APP_API_BASE_URL });
+Vue.use(notifier, store);
 
 new Vue({
   vuetify,
   router,
+  store,
   icons: {
     iconfont: 'fa',
   },

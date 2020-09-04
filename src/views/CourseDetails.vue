@@ -54,8 +54,13 @@ export default {
         this.fetchedCourse = (await this.$axios.get(`/courses/${this.courseId}`)).data.course;
         this.loading = false;
       } catch (e) {
-        // TODO: Better Error Handling Here.
-        console.error(e); // eslint-disable-line
+        if (e.response.status === 404) {
+          this.$notifier.error('Course not found.');
+        } else {
+          this.$notifier.error('Something went wrong. Please try again later.');
+        }
+
+        this.$router.push({ name: 'Courses' });
       }
     },
     async deleteCourse() {

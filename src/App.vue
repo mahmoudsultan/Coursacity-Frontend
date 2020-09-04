@@ -3,21 +3,24 @@
     <AppBar/>
     <v-main>
       <router-view></router-view>
+      <NotificationSnackbar />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import AppBar from '@/components/AppBar.vue';
+import NotificationSnackbar from '@/components/NotificationSnackbar';
 
 export default {
   name: 'CoursicityWebApp',
   components: {
     AppBar,
+    NotificationSnackbar,
   },
   data: () => ({
     //
-  }),
+  })
 };
 </script>
 
