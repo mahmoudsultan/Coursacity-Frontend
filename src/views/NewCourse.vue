@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <h1 class="text-h1">New Course</h1>
+        <h1 :class="textSize">New Course</h1>
       </v-col>
     </v-row>
     <v-row>
@@ -27,6 +27,16 @@ export default {
         message: '',
       },
     };
+  },
+  computed: {
+    textSize() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return 'text-h3'
+        case 'sm': return 'text-h3'
+        case 'md': return 'text-h2'
+        default: return 'text-h1'
+      }
+    },
   },
   methods: {
     async submit(newCourse) {

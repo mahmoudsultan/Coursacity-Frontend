@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-card elevation="2" >
+    <v-card elevation="2" :width="cardWidth">
       <v-img 
-        :src="coursePhoto" 
+        :src="coursePhoto"
         aspect-ratio="1.7"
         :lazy-src="lazyImageLoadingSource"
       />
@@ -26,9 +26,16 @@ export default {
     course: {
       type: Object,
       required: true
+    },
+    compact: {
+      type: Boolean,
+      default: false,
     }
   },
   computed: {
+    cardWidth() {
+      return (this.compact) ? '360' : 'auto';
+    },
     defaultImage() {
       return process.env.VUE_APP_DEFAULT_COURSE_PHOTO;
     },

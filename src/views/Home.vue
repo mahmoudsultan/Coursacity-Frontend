@@ -7,9 +7,9 @@
         <span class="mt-5 text-subtitle-1 white--text">Coursacity is the world’s fastest, most efficient way to master the skills tech companies want. 100% online, part-time & self-paced.</span>
       </v-col>
     </v-row>
-    <v-row justify="end" class="mt-auto mb-12" v-if="!hidePopularCourses">
-      <v-col cols="12" justify="center" align="center">
-        <h2 class="text-h5 mb-5 white--text">Popular Courses</h2>
+    <v-row align="end" class="mt-auto mb-12" v-if="!hidePopularCourses">
+      <v-col cols="12" lg="10" offset-lg="1" justify="center" align="center">
+        <h2 class="text-h5 white--text">Popular Courses</h2>
         <v-row class="pa-sm-5" justify="center">
           <v-col cols="8" sm="6" md="3" v-for="i in Array(numberOfPopularCoursesToShow).keys()" :key="i">
             <VerticalCourseCardSkeleton v-if="isCoursesLoading" />
@@ -44,6 +44,7 @@ export default {
   computed: {
     numberOfPopularCoursesToShow() {
       if (this.$vuetify.breakpoint.name == 'xs') return 1;
+      if (this.$vuetify.breakpoint.name == 'sm') return 2;
       return 3;
     }
   },

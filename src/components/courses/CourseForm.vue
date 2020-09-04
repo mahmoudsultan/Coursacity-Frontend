@@ -2,7 +2,7 @@
   <v-form v-model="isDataValid">
     <v-container fluid>
       <v-row>
-        <v-col cols="4">
+        <v-col cols="12" sm="8" md="6" lg="4">
           <v-text-field
             solo
             :rules="titleRules"
@@ -13,7 +13,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="8">
+        <v-col cols="12" sm="10" md="8">
           <v-textarea
             solo
             :rules="descriptionRules"
@@ -24,7 +24,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="4">
+        <v-col cols="12" sm="8" md="6" lg="4">
           <v-text-field
             solo
             :rules="slugRules"
@@ -35,7 +35,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="4">
+        <v-col cols="12" sm="8" md="6" lg="4">
           <v-file-input
             solo
             :rules="photoRules"
