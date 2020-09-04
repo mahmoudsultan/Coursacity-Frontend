@@ -108,6 +108,7 @@ export default {
     }
   },
   created() {
+    // XSS Prevention Handeled by Vue
     this.searchInput = this.$attrs.query;
     this.search();
   }

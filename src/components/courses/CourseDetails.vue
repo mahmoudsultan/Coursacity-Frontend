@@ -17,7 +17,7 @@
           >
             <v-overlay value="true" :color="overlayColor" absolute>
               <v-card-title primary-title>
-                <!-- TODO: Careful of XSS -->
+                <!-- TODO(DONE): Careful of XSS  [Handled by Vue] -->
                 <p class="text-center text-sm-h2 text-xs-h3">
                   {{ courseDetails.title }}
                   <v-btn rounded right color="error" @click="deleteCourse" :loading="deleteLoading">
