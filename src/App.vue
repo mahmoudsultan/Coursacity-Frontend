@@ -10,7 +10,7 @@
 
 <script>
 import AppBar from '@/components/AppBar.vue';
-import NotificationSnackbar from '@/components/NotificationSnackbar';
+const NotificationSnackbar = () => import('@/components/NotificationSnackbar');
 
 export default {
   name: 'CoursicityWebApp',

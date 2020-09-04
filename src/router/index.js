@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/Home.vue'
-import Courses from '@/views/Courses'
-import NewCourse from '@/views/NewCourse'
-import Search from '@/views/Search'
-import CourseDetails from '@/views/CourseDetails'
+
+const Home = () => import('@/views/Home.vue');
+const Courses = () => import('@/views/Courses');
+const NewCourse = () => import('@/views/NewCourse');
+const Search = () => import('@/views/Search');
+const CourseDetails = () => import('@/views/CourseDetails');
 
 Vue.use(VueRouter)
 

@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import VerticalCourseCard from '@/components/cards/VerticalCourseCard.vue'
+import VerticalCourseCard  from '@/components/cards/VerticalCourseCard.vue';
 
 export default {
   components: {
