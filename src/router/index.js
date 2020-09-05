@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const Home = () => import('@/views/Home.vue');
-const Courses = () => import('@/views/Courses');
-const NewCourse = () => import('@/views/NewCourse');
-const Search = () => import('@/views/Search');
-const CourseDetails = () => import('@/views/CourseDetails');
+const Home = () => import(/* webpackPrefetch: true */ '@/views/Home.vue');
+const Courses = () => import(/* webpackPrefetch: true */ '@/views/Courses');
+const NewCourse = () => import(/* webpackPrefetch: true */ '@/views/NewCourse');
+const Search = () => import(/* webpackPrefetch: true */ '@/views/Search');
+const CourseDetails = () => import(/* webpackPrefetch: true */ '@/views/CourseDetails');
 
 Vue.use(VueRouter)
 
